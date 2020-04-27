@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Axios from 'axios';
 
 import FormInput from '../form-input/form-input.component';
 
@@ -20,8 +21,16 @@ export default () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setEmail('');
-        setPassword('');
+        Axios({
+            method: 'post',
+            url: 'http://localhost:3001/users/login',
+            data: {
+                email,
+                password
+            }
+        })
+        .then(res => console.log(res.data))
+        .catch(err => console.log(err));
     }
 
     return (

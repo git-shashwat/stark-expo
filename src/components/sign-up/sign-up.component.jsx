@@ -4,9 +4,12 @@ import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 
 import './sign-up.styles.scss';
-import Axios from 'axios';
+import { connect } from 'react-redux';
+import { startUserSignup } from '../../redux/actions/auth';
 
-const SignUp = () => {
+const SignUp = ({
+    startSignup
+}) => {
     const [signupState, setSignupState] = useState({
         displayName: '',
         email: '',
@@ -21,24 +24,17 @@ const SignUp = () => {
             alert("passwords don't match");
             return;
         }
-            Axios({
-                method: 'post',
-                url: 'http://localhost:3001/users',
-                data: {
-                    displayName,
-                    email,
-                    password
-                }
-            })
-            .then(({ data }) => {
-                console.log(data)
-                setSignupState({
-                    displayName: '',
-                    email: '',
-                    password: '',
-                    confirmPassword: ''
-                });
-            }).catch(err => console.log(err));
+        startSignup({
+            email,
+            password,
+            displayName
+        });
+        setSignupState({
+            displayName: '',
+            email: '',
+            password: '',
+            confirmPassword: ''
+        });
     }
 
     const handleChange = e => {
@@ -92,4 +88,8 @@ const SignUp = () => {
     );
 };
 
-export default SignUp;
+const mapDispatchToProps = (dispatch) => ({
+    startSignup: (creds) => dispatch(startUserSignup(creds)) 
+});
+
+export default connect(undefined, mapDispatchToProps)(SignUp);

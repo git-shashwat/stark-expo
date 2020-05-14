@@ -1,36 +1,37 @@
 import React, { useState } from 'react';
-import Axios from 'axios';
+import { connect } from 'react-redux';
 
 import FormInput from '../form-input/form-input.component';
 
 import './sign-in.styles.scss';
 import CustomButtonComponent from '../custom-button/custom-button.component';
+import { startUserSignin } from '../../redux/actions/auth';
 
-export default () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+const SigninComponent = ({
+    startLogin
+}) => {
+    const [loginCredentials, setLoginCredentials] = useState({
+        email: '',
+        password: ''
+    });
 
     const handleChange = (e) => {
         const { value, name } = e.target;
-        if (name === 'email') {
-            setEmail(value);
-        } else {
-            setPassword(value)
-        }
+        setLoginCredentials({
+            ...loginCredentials,
+            [name]: value
+        });
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        Axios({
-            method: 'post',
-            url: 'http://localhost:3001/users/login',
-            data: {
-                email,
-                password
-            }
+        const { email, password } = loginCredentials;
+
+        startLogin(email, password);
+        setLoginCredentials({
+            email: '',
+            password: ''
         })
-        .then(res => console.log(res.data))
-        .catch(err => console.log(err));
     }
 
     return (
@@ -43,7 +44,7 @@ export default () => {
                  name="email"
                  type="email" 
                  label="Email"
-                 value={email} 
+                 value={loginCredentials.email} 
                  handleChange={handleChange}
                  required 
                 />
@@ -51,7 +52,7 @@ export default () => {
                  name="password" 
                  type="password" 
                  label="Password"
-                 value={password} 
+                 value={loginCredentials.password} 
                  handleChange={handleChange}
                  required
                 />
@@ -60,3 +61,9 @@ export default () => {
         </div>
     );
 }
+
+const mapDispatchToProps = (dispatch) => ({
+    startLogin: (email, password) => dispatch(startUserSignin(email, password))
+});
+
+export default connect(undefined, mapDispatchToProps)(SigninComponent);

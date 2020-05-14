@@ -1,8 +1,10 @@
 import Axios from 'axios';
 
+import { userActionTypes } from '../types/auth';
+
 // SIGNIN
 export const signin = (_id) => ({
-    type: 'SIGNIN',
+    type: userActionTypes.SIGNIN,
     _id
 });
 
@@ -27,7 +29,6 @@ export const startUserSignin = (email, password) => {
 
 //SIGNUP
 export const startUserSignup = (creds) => {
-    console.log('trying');
     return (dispatch, getState) => {
         Axios({
             method: 'post',
@@ -44,7 +45,7 @@ export const startUserSignup = (creds) => {
 
 //SIGNOUT
 export const signOut = () => ({
-    type: 'SIGNOUT'
+    type: userActionTypes.SIGNOUT
 });
 
 export const startUserSignOut = () => {

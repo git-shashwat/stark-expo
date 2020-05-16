@@ -1,7 +1,9 @@
+import PropTypes from "prop-types";
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from "../../assets/original.svg";
 
+import CartIcon from '../cart-icon/cart-icon.component';
 import './header.styles.scss';
 import { connect } from 'react-redux';
 import { startUserSignOut } from '../../redux/actions/auth';
@@ -38,10 +40,16 @@ const Header = ({
                         </Link>
                     )
                 }
+                <CartIcon />
             </div>
         </div>
     );
 };
+
+Header.propTypes = {
+  uid: PropTypes.any,
+  userSignOut: PropTypes.func
+}
 
 const mapStateToProps = (state) => ({
     uid: state.auth.uid

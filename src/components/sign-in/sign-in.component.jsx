@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
@@ -60,6 +61,10 @@ const SigninComponent = ({
             </form>
         </div>
     );
+}
+
+SigninComponent.propTypes = {
+  startLogin: PropTypes.func
 }
 
 const mapDispatchToProps = (dispatch) => ({

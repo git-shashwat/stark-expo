@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { useState } from 'react';
 
 import FormInput from '../form-input/form-input.component';
@@ -87,6 +88,10 @@ const SignUp = ({
         </div>
     );
 };
+
+SignUp.propTypes = {
+  startSignup: PropTypes.func
+}
 
 const mapDispatchToProps = (dispatch) => ({
     startSignup: (creds) => dispatch(startUserSignup(creds)) 

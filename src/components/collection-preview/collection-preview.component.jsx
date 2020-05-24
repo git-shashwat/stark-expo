@@ -11,8 +11,8 @@ export default ({ title, items }) => {
                 {
                     items
                     .filter((item, index) => index < 4)
-                    .map(({ id, ...rest }) => (
-                        <CollectionItemComponent key={id} {...rest} />
+                    .map(item => (
+                        <CollectionItemComponent key={item.id} item={item} />
                     ))
                 }
             </div>

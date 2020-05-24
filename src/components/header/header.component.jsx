@@ -4,12 +4,14 @@ import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from "../../assets/original.svg";
 
 import CartIcon from '../cart-icon/cart-icon.component';
+import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 import './header.styles.scss';
 import { connect } from 'react-redux';
 import { startUserSignOut } from '../../redux/actions/auth';
 
 const Header = ({
     uid,
+    hidden,
     userSignOut
 }) => {
 
@@ -42,6 +44,7 @@ const Header = ({
                 }
                 <CartIcon />
             </div>
+            {hidden && <CartDropdown />}
         </div>
     );
 };
@@ -51,8 +54,9 @@ Header.propTypes = {
   userSignOut: PropTypes.func
 }
 
-const mapStateToProps = (state) => ({
-    uid: state.auth.uid
+const mapStateToProps = ({auth: { uid }, cart: { hidden }}) => ({
+    uid,
+    hidden
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -42,9 +42,9 @@ const Header = ({
                         </Link>
                     )
                 }
-                <CartIcon />
+                {uid && <CartIcon />}
             </div>
-            {hidden && <CartDropdown />}
+            {(hidden && uid) && <CartDropdown />}
         </div>
     );
 };

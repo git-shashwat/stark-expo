@@ -19,8 +19,8 @@ export const startUserSignin = (email, password) => {
             }
         }).then(({ data }) => {
             dispatch(signin(data.user._id));
-            sessionStorage.setItem('uid', data.user._id);
-            sessionStorage.setItem('token', data.token);
+            localStorage.setItem('uid', data.user._id);
+            localStorage.setItem('token', data.token);
         }).catch(err => {
             console.log(err);
         }) 
@@ -37,8 +37,8 @@ export const startUserSignup = (creds) => {
         })
         .then(({ data }) => {
             dispatch(signin(data.user._id));
-            sessionStorage.setItem('uid', data.user._id);
-            sessionStorage.setItem('token', data.token);
+            localStorage.setItem('uid', data.user._id);
+            localStorage.setItem('token', data.token);
         }).catch(err => console.log(err));
     }
 }
@@ -53,13 +53,13 @@ export const startUserSignOut = () => {
         Axios({
             method: 'post',
             headers: {
-                Authorization: `Bearer ${sessionStorage.getItem('token')}`
+                Authorization: `Bearer ${localStorage.getItem('token')}`
             },
             url: 'http://localhost:3001/users/signout'
         })
         .then(() => {
-            sessionStorage.removeItem('uid');
-            sessionStorage.removeItem('token');
+            localStorage.removeItem('uid');
+            localStorage.removeItem('token');
             dispatch(signOut());
         })
         .catch(err => console.log(err));

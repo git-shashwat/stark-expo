@@ -27,9 +27,7 @@ MenuItem.propTypes = {
     url: PropTypes.any
   }),
   size: PropTypes.any,
-  title: PropTypes.shape({
-    toUpperCase: PropTypes.func
-  })
+  title: PropTypes.string
 }
 
 export default withRouter(MenuItem);

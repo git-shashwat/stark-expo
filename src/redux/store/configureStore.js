@@ -1,18 +1,14 @@
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import {persistStore  } from 'redux-persist';
 import thunk from 'redux-thunk';
-import authReducer from '../reducers/auth';
-import cartReducer from '../reducers/cart';
+import rootReducer from '../reducers/root';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const middlewares = [thunk];
 
-export default () => {
-    const store = createStore(
-        combineReducers({
-            auth: authReducer,
-            cart: cartReducer
-        }),
-        composeEnhancers(applyMiddleware(...middlewares))
-    );
-    return store;
-};
+export const store = createStore(
+    rootReducer,
+    composeEnhancers(applyMiddleware(...middlewares))
+);
+
+export const persistor = persistStore(store);

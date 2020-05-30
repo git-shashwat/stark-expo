@@ -1,16 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import configureStore from './redux/store/configureStore';
-import './index.css';
+import { store, persistor } from './redux/store/configureStore';
+import { PersistGate } from 'redux-persist/integration/react';
+
 import AppRouter, { history } from './routers/AppRouter';
 import { signOut, signin } from './redux/actions/auth';
 
-const store = configureStore();
+import './index.css';
 
 const jsx = (
   <Provider store={store}>
-    <AppRouter />
+    <PersistGate persistor={persistor}>
+      <AppRouter />
+    </PersistGate>
   </Provider>
 );
 
@@ -25,8 +28,8 @@ const renderApp = () => {
   }
 };
 
-if (!!sessionStorage.uid && !!sessionStorage.token) {
-  store.dispatch(signin(sessionStorage.uid));
+if (!!localStorage.uid && !!localStorage.token) {
+  store.dispatch(signin(localStorage.uid));
   renderApp();
   if (history.location.pathname === '/signin') {
     history.push('/shop');

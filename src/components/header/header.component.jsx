@@ -25,6 +25,8 @@ const Header = ({
                 <Logo className="logo" />                
             </Link>
             <div className="options">
+                {uid && <CartIcon />}
+                {(hidden && uid) && <CartDropdown />}
                 <Link className="option" to="/shop">
                     SHOP
                 </Link>
@@ -42,9 +44,7 @@ const Header = ({
                         </Link>
                     )
                 }
-                {uid && <CartIcon />}
             </div>
-            {(hidden && uid) && <CartDropdown />}
         </div>
     );
 };

@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { createStructuredSelector } from 'reselect';
 import { ReactComponent as Logo } from "../../assets/original.svg";
 
 import CartIcon from '../cart-icon/cart-icon.component';
@@ -8,6 +9,8 @@ import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 import './header.styles.scss';
 import { connect } from 'react-redux';
 import { startUserSignOut } from '../../redux/actions/auth';
+import { selectCurrentUser } from "../../redux/selectors/auth";
+import { selectCartHidden } from "../../redux/selectors/cart";
 
 const Header = ({
     uid,
@@ -54,9 +57,9 @@ Header.propTypes = {
   userSignOut: PropTypes.func
 }
 
-const mapStateToProps = ({auth: { uid }, cart: { hidden }}) => ({
-    uid,
-    hidden
+const mapStateToProps = createStructuredSelector({
+    uid: selectCurrentUser,
+    hidden: selectCartHidden
 });
 
 const mapDispatchToProps = (dispatch) => ({

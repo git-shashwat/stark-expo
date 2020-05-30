@@ -1,16 +1,19 @@
 import React from 'react';
 import { Router, Route, Switch, Redirect } from 'react-router-dom';
+import { createStructuredSelector } from 'reselect';
 import { createBrowserHistory } from 'history';
 import PrivateRoute from './PrivateRoute';
 
 import Header from '../components/header/header.component';
 import HomePage from '../pages/homepage/homepage.component';
 import ShopPage from '../pages/shop/shop.component';
+import CheckoutPage from '../pages/checkout/checkout.component';
 import AuthenticationPage from '../pages/authentication/authentication.component';
 
 import '../App.css';
 import '../reduction.styles.scss';
 import { connect } from 'react-redux';
+import { selectCurrentUser } from '../redux/selectors/auth';
 
 export const history = createBrowserHistory();
 
@@ -30,13 +33,14 @@ function AppRouter({ uid }) {
           <Route path="/" exact component={HomePage} />
           <Route path="/signin" component={AuthenticationPage} />
           <PrivateRoute path="/shop" component={ShopPage} />
+          <PrivateRoute exact path="/checkout" component={CheckoutPage} />
         </Switch>
     </Router>
   );
 }
 
-const mapStateToProps = (state) => ({
-    uid: state.auth.uid
+const mapStateToProps = createStructuredSelector({
+    uid: selectCurrentUser
 });
 
 export default connect(mapStateToProps)(AppRouter);

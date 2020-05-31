@@ -2,9 +2,9 @@ import PropTypes from "prop-types";
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-const MenuItem = ({ title, imageUrl, size, linkUrl, history, match }) => {
+const MenuItem = ({ title, imageUrl, size, linkUrl, history }) => {
     return (
-        <div className={`${size} menu-item`} onClick={() => history.push('/shop')}>
+        <div className={`${size} menu-item`} onClick={() => history.push(linkUrl)}>
             <div
              className="background-image"
              style={{ backgroundImage: `url(${imageUrl})` }}

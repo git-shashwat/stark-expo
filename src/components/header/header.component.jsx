@@ -1,16 +1,16 @@
 import PropTypes from "prop-types";
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import { ReactComponent as Logo } from "../../assets/original.svg";
 
 import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
-import './header.styles.scss';
 import { connect } from 'react-redux';
 import { startUserSignOut } from '../../redux/actions/auth';
 import { selectCurrentUser } from "../../redux/selectors/auth";
 import { selectCartHidden } from "../../redux/selectors/cart";
+
+import { HeaderContainer, LogoContainer, OptionsContainer, OptionDiv, OptionLink } from './header.styles';
 
 const Header = ({
     uid,
@@ -23,32 +23,32 @@ const Header = ({
     }
 
     return (
-        <div className="header">
-            <Link className="logo-container" to="/">
+        <HeaderContainer>
+            <LogoContainer className="logo-container" to="/">
                 <Logo className="logo" />                
-            </Link>
-            <div className="options">
+            </LogoContainer>
+            <OptionsContainer>
                 {uid && <CartIcon />}
                 {(hidden && uid) && <CartDropdown />}
-                <Link className="option" to="/shop">
+                <OptionLink to="/shop">
                     SHOP
-                </Link>
-                <Link className="option" to="/contact">
+                </OptionLink>
+                <OptionLink className="option" to="/contact">
                     CONTACT
-                </Link>
+                </OptionLink>
                 {uid ? (
-                    <div style={{ cursor: 'pointer' }} className="option" onClick={handleSignOut}>
+                    <OptionDiv onClick={handleSignOut}>
                         SIGN OUT
-                    </div>
+                    </OptionDiv>
                     )
                     : (
-                        <Link className="option" to="/signin">
+                        <OptionLink to="/signin">
                             SIGN IN
-                        </Link>
+                        </OptionLink>
                     )
                 }
-            </div>
-        </div>
+            </OptionsContainer>
+        </HeaderContainer>
     );
 };
 

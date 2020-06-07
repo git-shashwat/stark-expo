@@ -21,7 +21,7 @@ function AppRouter({ uid }) {
   let redirectToLogin, redirectToShop;
   if(!uid && history.location.pathname !== '/') {
     redirectToLogin = <Redirect to="/signin" />
-  } else if (uid && history.location.pathname === '/signin') {
+  } else if (uid && (history.location.pathname === '/signin')) {
     redirectToShop = <Redirect to="/shop" />
   }
   return (

@@ -1,5 +1,3 @@
-import Axios from 'axios';
-
 import { userActionTypes } from '../types/auth';
 
 // SIGNIN

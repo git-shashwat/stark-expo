@@ -32,6 +32,9 @@ export default (state = INITIAL_STATE, action) => {
                 cartItems: removeItemFromCart(state.cartItems, action.payload)
             }
 
+        case cartActionTypes.CLEAR_CART:
+            return INITIAL_STATE;
+            
         default: return state;
     }
 }

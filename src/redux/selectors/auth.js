@@ -6,3 +6,13 @@ export const selectCurrentUser = createSelector(
     [selectUser],
     user => user.uid
 );
+
+export const selectAuthToken = createSelector(
+    [selectUser],
+    auth => auth.token
+)
+
+export const selectAuthError = createSelector(
+    [selectUser],
+    auth => auth.error
+);

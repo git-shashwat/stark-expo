@@ -1,21 +1,36 @@
+import { userActionTypes } from "../types/auth";
+
 const INITIAL_STATE = {
-    _id: null
+    uid: null,
+    token: null,
+    error: null
 };
 
 export default (state = INITIAL_STATE, action) => {
     switch(action.type) {
 
-        case 'SIGNIN': 
+        case userActionTypes.SIGNIN_SUCCESS: 
             return {
                 ...state,
-                uid: action._id
+                uid: action.payload.uid,
+                token: action.payload.token, 
+                error: null
             }
 
-        case 'SIGNOUT':
+        case userActionTypes.SIGNOUT_SUCCESS:
             return {
                 ...state,
                 uid: null,
-                profile: null
+                token: null,
+                error: null
+              };
+
+        case userActionTypes.SIGNUP_FAILURE:
+        case userActionTypes.SIGNIN_FAILURE:
+        case userActionTypes.SIGNOUT_FAILURE:
+            return {
+                ...state,
+                error: action.payload
             }
 
         default:

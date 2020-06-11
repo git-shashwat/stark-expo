@@ -1,15 +1,19 @@
 import PropTypes from "prop-types";
 import React, { useState } from 'react';
+import { createStructuredSelector } from 'reselect';
+import { connect } from 'react-redux';
 
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 
 import './sign-up.styles.scss';
-import { connect } from 'react-redux';
-import { startUserSignup } from '../../redux/actions/auth';
+import { startSignUp } from '../../redux/actions/auth';
+import { selectAuthError } from "../../redux/selectors/auth";
+import { Alert } from "reactstrap";
 
 const SignUp = ({
-    startSignup
+    startSignup,
+    signUpError
 }) => {
     const [signupState, setSignupState] = useState({
         displayName: '',
@@ -50,6 +54,7 @@ const SignUp = ({
         <div className="sign-up">
             <h2 className="title">I do not have an account</h2>
             <span>Sign up with your email and password</span>
+            {!!signUpError && <Alert color="danger">Sign Up Failed</Alert>}
             <form className="sign-up-form" onSubmit={handleSubmit}>
                 <FormInput
                     type="text"
@@ -93,8 +98,12 @@ SignUp.propTypes = {
   startSignup: PropTypes.func
 }
 
-const mapDispatchToProps = (dispatch) => ({
-    startSignup: (creds) => dispatch(startUserSignup(creds)) 
+const mapStateToProps = createStructuredSelector({
+    signUpError: selectAuthError
 });
 
-export default connect(undefined, mapDispatchToProps)(SignUp);
+const mapDispatchToProps = dispatch => ({
+    startSignup: (creds) => dispatch(startSignUp(creds)) 
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

@@ -6,10 +6,14 @@ import FormInput from '../form-input/form-input.component';
 
 import './sign-in.styles.scss';
 import CustomButtonComponent from '../custom-button/custom-button.component';
-import { startUserSignin } from '../../redux/actions/auth';
+import { startSignIn } from '../../redux/actions/auth';
+import { createStructuredSelector } from "reselect";
+import { selectAuthError } from "../../redux/selectors/auth";
+import { Alert } from "reactstrap";
 
 const SigninComponent = ({
-    startLogin
+    startSignIn,
+    signInError
 }) => {
     const [loginCredentials, setLoginCredentials] = useState({
         email: '',
@@ -28,7 +32,7 @@ const SigninComponent = ({
         e.preventDefault();
         const { email, password } = loginCredentials;
 
-        startLogin(email, password);
+        startSignIn(email, password);
         setLoginCredentials({
             email: '',
             password: ''
@@ -39,6 +43,7 @@ const SigninComponent = ({
         <div className="sign-in">
             <h2>I already have an account</h2>
             <span>Sign in with your email and password</span>
+            {!!signInError && <Alert color="danger">Sign In Failed</Alert>}
 
             <form onSubmit={handleSubmit}>
                 <FormInput
@@ -64,11 +69,15 @@ const SigninComponent = ({
 }
 
 SigninComponent.propTypes = {
-  startLogin: PropTypes.func
+  startSignIn: PropTypes.func
 }
 
-const mapDispatchToProps = (dispatch) => ({
-    startLogin: (email, password) => dispatch(startUserSignin(email, password))
+const mapStateToProps = createStructuredSelector({
+    signInError: selectAuthError
 });
 
-export default connect(undefined, mapDispatchToProps)(SigninComponent);
+const mapDispatchToProps = (dispatch) => ({
+    startSignIn: (email, password) => dispatch(startSignIn({ email, password }))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SigninComponent);

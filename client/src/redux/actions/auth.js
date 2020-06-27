@@ -2,15 +2,13 @@ import { userActionTypes } from '../types/auth';
 
 // SIGNIN
 
-export const startSignIn = ({ email, password }) => {
-    return ({
-        type: userActionTypes.START_SIGNIN,
-        payload: {
-            email,
-            password
-        }
-    })
-};
+export const startSignIn = ({ email, password }) => ({
+    type: userActionTypes.START_SIGNIN,
+    payload: {
+        email,
+        password
+    }
+});
 
 export const signInSuccess = ({ uid, token }) => ({
     type: userActionTypes.SIGNIN_SUCCESS,

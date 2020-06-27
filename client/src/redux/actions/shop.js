@@ -25,7 +25,7 @@ export const fetchCollectionsStartAsync = () => {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
             },
-            url: 'http://localhost:3001/collections',
+            url: '/collections',
         })
         .then(({ data }) => {
             const collectionsMap = convertCollectionResponseToMap(data);

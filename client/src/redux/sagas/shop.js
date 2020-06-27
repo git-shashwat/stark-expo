@@ -14,7 +14,7 @@ export function* fetchCollectionsAsync() {
             headers: {
                 Authorization: `Bearer ${authToken}`
             },
-            url: 'http://localhost:3001/collections',
+            url: '/collections',
         });
         const collectionsMap = yield call(convertCollectionResponseToMap, data);
         yield put(fetchCollectionsSuccess(collectionsMap));

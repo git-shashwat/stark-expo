@@ -11,7 +11,7 @@ const StripeCheckoutButton = ({ price, authToken }) => {
 
     const onToken = token => {
         Axios({
-            url: 'http://localhost:3001/payment',
+            url: '/payment',
             method: 'POST',
             headers: {
                 Authorization: `Bearer ${authToken}`

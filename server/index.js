@@ -3,7 +3,7 @@ const cors = require('cors');
 const path = require('path');
 require('./src/db/mongoose');
 
-if (process.env.NODE_ENV !== 'production') require('dotenv').config();
+// if (process.env.NODE_ENV !== 'production') require('dotenv').config();
 
 const userRouter = require('./src/routers/user');
 const paymentRouter = require('./src/routers/payment');

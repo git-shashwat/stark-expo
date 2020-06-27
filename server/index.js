@@ -10,7 +10,7 @@ const paymentRouter = require('./src/routers/payment');
 const collectionRouter = require('./src/routers/collection');
 
 const app = express();
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 5000;
 
 // Maintainence mode
 // app.use((req, res, next) => {

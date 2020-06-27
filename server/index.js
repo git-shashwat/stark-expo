@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 require('./src/db/mongoose');
 
 if (process.env.NODE_ENV !== 'production') require('dotenv').config();
@@ -18,9 +19,17 @@ const port = process.env.PORT || 3001;
 
 app.use(cors());
 app.use(express.json());
+
+app.use(express.static(path.resolve(__dirname, '../client/build')));
+
 app.use(userRouter);
 app.use(paymentRouter);
 app.use(collectionRouter);
+
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+});
+
 
 app.listen(port, () => {
     console.log(`Server is up and running on port ${port}`);

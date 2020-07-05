@@ -14,7 +14,7 @@ export function* fetchCollectionsAsync() {
             headers: {
                 Authorization: `Bearer ${authToken}`
             },
-            url: '/collections',
+            url: process.env.NODE_ENV === 'production' ? '/collections' : 'http://localhost:5000/collections',
         });
         const collectionsMap = yield call(convertCollectionResponseToMap, data);
         yield put(fetchCollectionsSuccess(collectionsMap));

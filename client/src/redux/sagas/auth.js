@@ -27,7 +27,7 @@ export function* signUp ({ payload: { email, password, displayName } }) {
     try {
         const { data: { user: { _id }, token } } = yield Axios({
             method: 'post',
-            url: '/users/signup',
+            url: process.env.NODE_ENV === 'production' ? '/users/signup' : 'http://localhost:5000/users/signup',
             data: {
                 email,
                 password,
@@ -53,7 +53,7 @@ export function* signIn ({ payload: { email, password }}) {
     try {
         const { data: { user: { _id }, token } } = yield Axios({
             method: 'post',
-            url: '/users/signin',
+            url: process.env.NODE_ENV === 'production' ? '/users/signin' : 'http://localhost:5000/users/signin',
             data: {
                 email,
                 password
@@ -82,7 +82,7 @@ export function* signOut () {
             headers: {
                 Authorization: `Bearer ${authToken}`
             },
-            url: '/users/signout'
+            url: process.env.NODE_ENV === 'production' ? '/users/signout' : 'http://localhost:5000/users/signout' 
         });   
         yield localStorage.removeItem('uid');
         yield localStorage.removeItem('token');

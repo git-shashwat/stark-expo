@@ -15,5 +15,4 @@ jobs:
       - run: npm ci
       - run: npm run build
       - uses: actions/heroku@master
-          env:
-            HEROKU_TOKEN: ${{ secrets.HEROKU_TOKEN }}
+          secrets: [${{ secrets.HEROKU_TOKEN }}]

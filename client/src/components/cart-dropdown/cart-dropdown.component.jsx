@@ -1,5 +1,5 @@
 import React from 'react';
-import {withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 

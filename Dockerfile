@@ -9,7 +9,6 @@ LABEL "com.github.actions.name"="GitHub Action for Heroku"
 LABEL "com.github.actions.description"="Wraps the Heroku CLI to enable common Heroku commands."
 LABEL "com.github.actions.icon"="upload-cloud"
 LABEL "com.github.actions.color"="purple"
-COPY LICENSE README.md THIRD_PARTY_NOTICE.md /
 
 ENV DOCKERVERSION=18.06.1-ce
 RUN apt-get update && apt-get -y --no-install-recommends install curl \

@@ -29,9 +29,6 @@ const Header = ({
                 <OptionLink to="/shop">
                     SHOP
                 </OptionLink>
-                <OptionLink className="option" to="/contact">
-                    CONTACT
-                </OptionLink>
                 {uid ? (
                     <OptionDiv onClick={() => startSignOut()}>
                         SIGN OUT

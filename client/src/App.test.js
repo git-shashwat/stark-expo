@@ -15,6 +15,6 @@ test('renders learn react link', () => {
   );
 
   const { getByText } = render(jsx);
-  const linkElement = getByText(/CONTACT/i);
+  const linkElement = getByText(/dskfas/i);
   expect(linkElement).toBeInTheDocument();
 });
